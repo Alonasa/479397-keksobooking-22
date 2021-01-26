@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
-* Студент: [Алена Скрыпник](https://up.htmlacademy.ru/javascript/22/user/479397).
-* Наставник: `Неизвестно`.
+- Студент: [Алена Скрыпник](https://up.htmlacademy.ru/javascript/22/user/479397).
+- Наставник: [RAMAN LAURYNIUK](https://htmlacademy.ru/profile/id1666565).
 
 ---
 

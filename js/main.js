@@ -3,7 +3,7 @@ let getRandomNumber = function (min, max, decimalPoints) {
   return +findRandom.toFixed(decimalPoints);
 };
 
-console.log(getRandomNumber(3, 7, 0));
+getRandomNumber(3, 7, 0);
 
 /*
 Нашли рандомное число

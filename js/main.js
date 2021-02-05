@@ -78,8 +78,3 @@ const generatePropertiesData = function() {
 }
 
 generatePropertiesData();
-
-
-
-
-

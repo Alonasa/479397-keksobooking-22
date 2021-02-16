@@ -1,1 +1,3 @@
-import './offer-initial.js';
+import './const.js';
+import './utils.js';
+import './data.js';

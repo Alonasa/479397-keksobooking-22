@@ -1,4 +1,5 @@
 import { offersList } from './utils.js';
+import { PROPERTY_TYPES } from './const.js';
 
 const similarCardTemplate = document
   .querySelector('#card')
@@ -35,7 +36,7 @@ let oldElementRemove = function (parent) {
 };
 
 //prettier-ignore
-const generateOffer = function() {
+const generateOffer = function () {
   const offerElement = similarCardTemplate.cloneNode(true);
   offerElement.classList.add('map__card');
   offerElement.querySelector('.popup__title')
@@ -45,7 +46,7 @@ const generateOffer = function() {
   offerElement.querySelector('.popup__text--price')
     .textContent = `${offersList[0].offer.price} ₽/ночь`;
   offerElement.querySelector('.popup__type')
-    .textContent = offersList[0].offer.type;
+    .textContent = PROPERTY_TYPES[offersList[0].offer.type];
   offerElement.querySelector('.popup__text--capacity')
     .textContent = `${offersList[0].offer.rooms} комнаты для
     ${offersList[0].offer.guests} гостей`;

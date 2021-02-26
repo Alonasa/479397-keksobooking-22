@@ -27,6 +27,13 @@ const PHOTOS_LIST = [
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ];
 
+const PROPERTY_TYPES = {
+  palace: 'Дворец',
+  flat: 'Квартира',
+  house: 'Дом',
+  bungalo: 'Бунгало',
+};
+
 const offersList = [];
 //prettier-ignore
 export {
@@ -45,5 +52,6 @@ export {
   CHECK_HOURS,
   FEATURES_LIST,
   PHOTOS_LIST,
+  PROPERTY_TYPES,
   offersList
 }

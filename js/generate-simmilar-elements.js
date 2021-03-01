@@ -29,7 +29,7 @@ const createPhoto = function (photo) {
   return fragment;
 };
 
-let oldElementRemove = function (parent) {
+const oldElementRemove = function (parent) {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }

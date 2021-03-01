@@ -8,7 +8,7 @@ const Y_MIN = 139.7;
 const Y_MAX = 139.8;
 const X_MIN = 35.65;
 const X_MAX = 35.7;
-const TYPES_OF_RENT = ['palace', 'flat', 'house', 'bungalo'];
+const TYPES_OF_RENT = ['palace', 'flat', 'house', 'bungalow'];
 const ROOMS_QUANTITY = [1, 2, 3, 100];
 const CHECK_HOURS = ['12:00', '13:00', '14:00'];
 
@@ -31,10 +31,18 @@ const PROPERTY_TYPES = {
   palace: 'Дворец',
   flat: 'Квартира',
   house: 'Дом',
-  bungalo: 'Бунгало',
+  bungalow: 'Бунгало',
 };
 
 const offersList = [];
+
+const PROPERTY_TYPES_MIN_PRICES = {
+  palace: 10000,
+  flat: 1000,
+  house: 5000,
+  bungalow: 0,
+};
+
 //prettier-ignore
 export {
   QUANTITY,
@@ -53,5 +61,6 @@ export {
   FEATURES_LIST,
   PHOTOS_LIST,
   PROPERTY_TYPES,
-  offersList
-}
+  offersList,
+  PROPERTY_TYPES_MIN_PRICES
+};

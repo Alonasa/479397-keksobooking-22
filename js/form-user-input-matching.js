@@ -3,8 +3,11 @@ const getAdvertiseForm = document.querySelector('.ad-form');
 
 const getTypeRent = getAdvertiseForm.querySelector('#type');
 let getPriceRent = getAdvertiseForm.querySelector('#price');
+const getTime = getAdvertiseForm.querySelector('.ad-form__element--time');
+const getTimeIn = getTime.querySelector('#timein');
+const getTimeOut = getTime.querySelector('#timeout');
 
-const typeRentValue = function () {
+const typeRentValue = () => {
   const getMinPrice = PROPERTY_TYPES_MIN_PRICES[getTypeRent.value];
   getPriceRent.type = 'number';
   getPriceRent.min = getMinPrice;
@@ -14,4 +17,11 @@ const typeRentValue = function () {
 
 getTypeRent.addEventListener('change', typeRentValue);
 
-export { getTypeRent };
+const timeSync = (time1, time2) => {
+  time1.addEventListener('change', function () {
+    time2.value = time1.value;
+  });
+};
+
+timeSync(getTimeIn, getTimeOut);
+timeSync(getTimeOut, getTimeIn);

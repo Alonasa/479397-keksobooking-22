@@ -2,7 +2,7 @@ import { PROPERTY_TYPES_MIN_PRICES, MAX_PRICE } from './const.js';
 const getAdvertiseForm = document.querySelector('.ad-form');
 
 const getTypeRent = getAdvertiseForm.querySelector('#type');
-let getPriceRent = getAdvertiseForm.querySelector('#price');
+const getPriceRent = getAdvertiseForm.querySelector('#price');
 const getTime = getAdvertiseForm.querySelector('.ad-form__element--time');
 const getTimeIn = getTime.querySelector('#timein');
 const getTimeOut = getTime.querySelector('#timeout');

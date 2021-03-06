@@ -10,6 +10,12 @@ const formDeactivation = () => {
 };
 formDeactivation();
 
+const formActivation = () => {
+  getAdvertiseForm.classList.remove('ad-form--disabled');
+  getFiltersForm.forEach((element) => (element.disabled = false));
+  getFeatures.disabled = false;
+};
+
 const getTypeRent = getAdvertiseForm.querySelector('#type');
 const getPriceRent = getAdvertiseForm.querySelector('#price');
 const getTime = getAdvertiseForm.querySelector('.ad-form__element--time');
@@ -34,3 +40,5 @@ const timeSync = (time1, time2) => {
 
 timeSync(getTimeIn, getTimeOut);
 timeSync(getTimeOut, getTimeIn);
+
+export { formActivation };

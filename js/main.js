@@ -1,6 +1,6 @@
 import './const.js';
 import './utils.js';
 import './data.js';
-//prettier-ignore
-import  './generate-simmilar-elements.js';
+import './generate-simmilar-elements.js';
 import './user-form.js';
+import './map.js';

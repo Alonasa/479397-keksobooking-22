@@ -1,5 +1,14 @@
 import { PROPERTY_TYPES_MIN_PRICES, MAX_PRICE } from './const.js';
 const getAdvertiseForm = document.querySelector('.ad-form');
+const getFiltersForm = document.querySelectorAll('.map__filter');
+const getFeatures = document.querySelector('.map__features');
+
+const formDeactivation = () => {
+  getAdvertiseForm.classList.add('ad-form--disabled');
+  getFiltersForm.forEach((element) => element.setAttribute('disabled', ''));
+  getFeatures.setAttribute('disabled', '');
+};
+formDeactivation();
 
 const getTypeRent = getAdvertiseForm.querySelector('#type');
 const getPriceRent = getAdvertiseForm.querySelector('#price');

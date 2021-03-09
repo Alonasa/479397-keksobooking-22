@@ -1,5 +1,5 @@
 import { formActivation } from './user-form.js';
-import { generateOffer } from './generate-simmilar-elements.js';
+import { offersList } from './utils.js';
 
 const CENTER_LAT = 35.4137;
 const CENTER_LNG = 139.41502;
@@ -24,7 +24,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-const pinIcon = L.icon({
+const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
   iconSize: [36, 36],
   iconAnchor: [18, 36],
@@ -32,27 +32,52 @@ const pinIcon = L.icon({
 
 //prettier-ignore
 
-const marker = L.marker(
+const mainMarker = L.marker(
   {
     lat: CENTER_LAT,
     lng: CENTER_LNG,
   },
   {
     draggable: true,
-    icon: pinIcon,
+    icon: mainPinIcon,
   },
 );
 
 map.on('move', function () {
-  marker.setLatLng(map.getCenter());
+  mainMarker.setLatLng(map.getCenter());
 });
 
-marker.on('move', function (e) {
-  const position = marker.getLatLng(e);
+mainMarker.on('move', function (e) {
+  const position = mainMarker.getLatLng(e);
   let lat = Number(position['lat']).toFixed(5);
   let lng = Number(position['lng']).toFixed(5);
   address.value = lat + ', ' + lng;
   address.setAttribute('readonly', 'true');
 });
 
-marker.addTo(map);
+mainMarker.addTo(map);
+
+const pinIcon = L.icon({
+  iconUrl: './img/pin.svg',
+  iconSize: [36, 36],
+  iconAnchor: [18, 36],
+});
+
+//prettier-ignore
+const setOffers = () => {
+  for (let i = 0; i < offersList.length; i++) {
+    const { x = lat, y = lng } = offersList[i].location;
+    const marker = L.marker(
+      {
+        lat: x,
+        lng: y,
+      },
+      {
+        icon: pinIcon,
+      },
+    );
+    marker.addTo(map);
+  }
+};
+
+setOffers();

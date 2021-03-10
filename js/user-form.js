@@ -71,9 +71,11 @@ adTitle.addEventListener('input', () => {
 });
 
 const roomCapacity = () => {
-  if (roomsQuantity.value === '100' && guestsQuantity.value != '0') {
+  if (
+    (roomsQuantity.value === '100' && guestsQuantity.value !== '0') ||
+    (guestsQuantity.value === '0' && roomsQuantity.value !== '100')
+  ) {
     //prettier-ignore
-
     roomsQuantity.setCustomValidity(
       'Вариант размещения не предназначен для гостей. Проверьте поле количество мест',
     );
@@ -81,8 +83,7 @@ const roomCapacity = () => {
     //prettier-ignore
     roomsQuantity.setCustomValidity(
       'Количество гостей не должно превышать количество комнат.',
-    );
-    //prettier-ignore
+    ),
     guestsQuantity.setCustomValidity(
       'Количество гостей не должно превышать количество комнат.',
     );
@@ -93,7 +94,9 @@ const roomCapacity = () => {
   roomsQuantity.reportValidity();
   guestsQuantity.reportValidity();
 };
+
 roomsQuantity.addEventListener('change', roomCapacity);
 guestsQuantity.addEventListener('change', roomCapacity);
+roomCapacity();
 
 export { formActivation };

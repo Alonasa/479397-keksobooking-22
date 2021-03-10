@@ -34,6 +34,8 @@ const typeRentValue = () => {
   getPriceRent.value = getMinPrice;
 };
 
+typeRentValue();
+
 getTypeRent.addEventListener('change', typeRentValue);
 
 const timeSync = (time1, time2) => {

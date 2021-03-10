@@ -1,5 +1,12 @@
 import { formActivation } from './user-form.js';
 import { offersList } from './utils.js';
+const L = window.L;
+//prettier-ignore
+import {
+  similarListFragment,
+  mapCanvas,
+  generateOffer
+} from './generate-simmilar-elements.js';
 
 const CENTER_LAT = 35.4137;
 const CENTER_LNG = 139.41502;
@@ -62,21 +69,23 @@ const pinIcon = L.icon({
   iconSize: [36, 36],
   iconAnchor: [18, 36],
 });
-
 //prettier-ignore
 const setOffers = () => {
   for (let i = 0; i < offersList.length; i++) {
-    const { x = lat, y = lng } = offersList[i].location;
+    const { x = marker.lat, y = marker.lng } = offersList[i].location;
     const marker = L.marker(
       {
-        lat: x,
-        lng: y,
+        lat: x.toFixed(5),
+        lng: y.toFixed(5),
       },
       {
         icon: pinIcon,
       },
-    );
+    ).bindPopup(mapCanvas.appendChild(similarListFragment));
     marker.addTo(map);
+    marker.on('click', function () {
+      generateOffer(i);
+    })
   }
 };
 

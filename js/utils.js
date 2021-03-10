@@ -17,7 +17,10 @@ const generatePropertiesData = function () {
 
 generatePropertiesData();
 
-export { getRandomArrayItem };
-export { getRandomNumber };
-export { generatePropertiesData };
-export { offersList };
+//prettier-ignore
+export {
+  generatePropertiesData,
+  getRandomArrayItem,
+  getRandomNumber,
+  offersList
+};

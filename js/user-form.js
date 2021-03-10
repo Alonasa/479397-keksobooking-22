@@ -2,6 +2,7 @@ import { PROPERTY_TYPES_MIN_PRICES, MAX_PRICE } from './const.js';
 const getAdvertiseForm = document.querySelector('.ad-form');
 const getFiltersForm = document.querySelectorAll('.map__filter');
 const getFeatures = document.querySelector('.map__features');
+const adTitle = getAdvertiseForm.querySelector('#title');
 
 const formDeactivation = () => {
   getAdvertiseForm.classList.add('ad-form--disabled');
@@ -40,5 +41,19 @@ const timeSync = (time1, time2) => {
 
 timeSync(getTimeIn, getTimeOut);
 timeSync(getTimeOut, getTimeIn);
+
+adTitle.addEventListener('invalid', () => {
+  if (adTitle.validity.tooShort) {
+    adTitle.setCustomValidity(
+      'Заголовок должен состоять минимум из 30-ти символов'
+    );
+  } else if (adTitle.validity.tooLong) {
+    adTitle.setCustomValidity('Заголовок не должен превышать 100 символов');
+  } else if (adTitle.validity.valueMissing) {
+    adTitle.setCustomValidity('Обязательное поле');
+  } else {
+    adTitle.setCustomValidity('');
+  }
+});
 
 export { formActivation };

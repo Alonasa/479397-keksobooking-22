@@ -8,6 +8,8 @@ const getPriceRent = getAdvertiseForm.querySelector('#price');
 const getTime = getAdvertiseForm.querySelector('.ad-form__element--time');
 const getTimeIn = getTime.querySelector('#timein');
 const getTimeOut = getTime.querySelector('#timeout');
+const roomsQuantity = document.querySelector('#room_number');
+const guestsQuantity = document.querySelector('#capacity');
 
 const formDeactivation = () => {
   getAdvertiseForm.classList.add('ad-form--disabled');
@@ -43,8 +45,9 @@ timeSync(getTimeOut, getTimeIn);
 
 adTitle.addEventListener('invalid', () => {
   if (adTitle.validity.tooShort) {
+    //prettier-ignore
     adTitle.setCustomValidity(
-      'Заголовок должен состоять минимум из 30-ти символов'
+      'Заголовок должен состоять минимум из 30-ти символов',
     );
   } else if (adTitle.validity.tooLong) {
     adTitle.setCustomValidity('Заголовок не должен превышать 100 символов');
@@ -54,5 +57,31 @@ adTitle.addEventListener('invalid', () => {
     adTitle.setCustomValidity('');
   }
 });
+
+const roomCapacity = () => {
+  if (roomsQuantity.value === '100' && guestsQuantity.value != '0') {
+    //prettier-ignore
+
+    roomsQuantity.setCustomValidity(
+      'Вариант размещения не предназначен для гостей. Проверьте поле количество мест',
+    );
+  } else if (guestsQuantity.value > roomsQuantity.value) {
+    //prettier-ignore
+    roomsQuantity.setCustomValidity(
+      'Количество гостей не должно превышать количество комнат.',
+    );
+    //prettier-ignore
+    guestsQuantity.setCustomValidity(
+      'Количество гостей не должно превышать количество комнат.',
+    );
+  } else {
+    roomsQuantity.setCustomValidity('');
+    guestsQuantity.setCustomValidity('');
+  }
+  roomsQuantity.reportValidity();
+  guestsQuantity.reportValidity();
+};
+roomsQuantity.addEventListener('change', roomCapacity);
+guestsQuantity.addEventListener('change', roomCapacity);
 
 export { formActivation };

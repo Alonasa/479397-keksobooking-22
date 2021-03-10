@@ -1,8 +1,23 @@
 import { PROPERTY_TYPES_MIN_PRICES, MAX_PRICE } from './const.js';
 const getAdvertiseForm = document.querySelector('.ad-form');
+const getFiltersForm = document.querySelectorAll('.map__filter');
+const getFeatures = document.querySelector('.map__features');
+
+const formDeactivation = () => {
+  getAdvertiseForm.classList.add('ad-form--disabled');
+  getFiltersForm.forEach((element) => element.setAttribute('disabled', ''));
+  getFeatures.setAttribute('disabled', '');
+};
+formDeactivation();
+
+const formActivation = () => {
+  getAdvertiseForm.classList.remove('ad-form--disabled');
+  getFiltersForm.forEach((element) => (element.disabled = false));
+  getFeatures.disabled = false;
+};
 
 const getTypeRent = getAdvertiseForm.querySelector('#type');
-let getPriceRent = getAdvertiseForm.querySelector('#price');
+const getPriceRent = getAdvertiseForm.querySelector('#price');
 const getTime = getAdvertiseForm.querySelector('.ad-form__element--time');
 const getTimeIn = getTime.querySelector('#timein');
 const getTimeOut = getTime.querySelector('#timeout');
@@ -25,3 +40,5 @@ const timeSync = (time1, time2) => {
 
 timeSync(getTimeIn, getTimeOut);
 timeSync(getTimeOut, getTimeIn);
+
+export { formActivation };

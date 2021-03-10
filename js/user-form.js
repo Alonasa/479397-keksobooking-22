@@ -3,6 +3,11 @@ const getAdvertiseForm = document.querySelector('.ad-form');
 const getFiltersForm = document.querySelectorAll('.map__filter');
 const getFeatures = document.querySelector('.map__features');
 const adTitle = getAdvertiseForm.querySelector('#title');
+const getTypeRent = getAdvertiseForm.querySelector('#type');
+const getPriceRent = getAdvertiseForm.querySelector('#price');
+const getTime = getAdvertiseForm.querySelector('.ad-form__element--time');
+const getTimeIn = getTime.querySelector('#timein');
+const getTimeOut = getTime.querySelector('#timeout');
 
 const formDeactivation = () => {
   getAdvertiseForm.classList.add('ad-form--disabled');
@@ -16,12 +21,6 @@ const formActivation = () => {
   getFiltersForm.forEach((element) => (element.disabled = false));
   getFeatures.disabled = false;
 };
-
-const getTypeRent = getAdvertiseForm.querySelector('#type');
-const getPriceRent = getAdvertiseForm.querySelector('#price');
-const getTime = getAdvertiseForm.querySelector('.ad-form__element--time');
-const getTimeIn = getTime.querySelector('#timein');
-const getTimeOut = getTime.querySelector('#timeout');
 
 const typeRentValue = () => {
   const getMinPrice = PROPERTY_TYPES_MIN_PRICES[getTypeRent.value];

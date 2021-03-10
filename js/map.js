@@ -81,7 +81,11 @@ const setOffers = () => {
       {
         icon: pinIcon,
       },
-    ).bindPopup(mapCanvas.appendChild(similarListFragment));
+    ).bindPopup(mapCanvas.appendChild(similarListFragment),
+      {
+        keepInView: true,
+      },
+    );
     marker.addTo(map);
     marker.on('click', function () {
       generateOffer(i);

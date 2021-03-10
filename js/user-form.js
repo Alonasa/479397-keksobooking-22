@@ -10,6 +10,8 @@ const getTimeIn = getTime.querySelector('#timein');
 const getTimeOut = getTime.querySelector('#timeout');
 const roomsQuantity = document.querySelector('#room_number');
 const guestsQuantity = document.querySelector('#capacity');
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
 
 const formDeactivation = () => {
   getAdvertiseForm.classList.add('ad-form--disabled');
@@ -43,19 +45,27 @@ const timeSync = (time1, time2) => {
 timeSync(getTimeIn, getTimeOut);
 timeSync(getTimeOut, getTimeIn);
 
-adTitle.addEventListener('invalid', () => {
-  if (adTitle.validity.tooShort) {
+adTitle.addEventListener('input', () => {
+  const valueLength = adTitle.value.length;
+
+  if (valueLength < MIN_TITLE_LENGTH) {
     //prettier-ignore
     adTitle.setCustomValidity(
-      'Заголовок должен состоять минимум из 30-ти символов',
+      'Минимальная длина поля ' + MIN_TITLE_LENGTH + ' символов. Добавьте ещё ' +
+        (MIN_TITLE_LENGTH - valueLength) +
+        ' симв.',
     );
-  } else if (adTitle.validity.tooLong) {
-    adTitle.setCustomValidity('Заголовок не должен превышать 100 символов');
-  } else if (adTitle.validity.valueMissing) {
-    adTitle.setCustomValidity('Обязательное поле');
+  } else if (valueLength > MAX_TITLE_LENGTH) {
+    //prettier-ignore
+
+    adTitle.setCustomValidity(
+      'Максимальная длина поля ' + MAX_TITLE_LENGTH + ' Удалите лишние ' + (valueLength - MAX_TITLE_LENGTH) + ' симв.',
+    );
   } else {
     adTitle.setCustomValidity('');
   }
+
+  adTitle.reportValidity();
 });
 
 const roomCapacity = () => {

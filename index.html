@@ -148,6 +148,7 @@
           class="ad-form"
           method="post"
           enctype="multipart/form-data"
+          action="https://22.javascript.pages.academy/keksobooking"
           autocomplete="off"
         >
           <fieldset class="ad-form-header">
@@ -192,6 +193,9 @@
               name="title"
               type="text"
               placeholder="Милая, уютная квартирка в центре Токио"
+              minlength="30"
+              maxlength="100"
+              required
             />
           </fieldset>
           <fieldset class="ad-form__element ad-form__element--wide">
@@ -211,7 +215,13 @@
           </fieldset>
           <fieldset class="ad-form__element">
             <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
-            <input id="price" name="price" type="number" placeholder="5000" />
+            <input
+              id="price"
+              name="price"
+              type="number"
+              placeholder="5000"
+              required
+            />
           </fieldset>
           <fieldset class="ad-form__element ad-form__element--time">
             <label class="ad-form__label" for="timein"
@@ -334,6 +344,7 @@
                   id="images"
                   name="images"
                   class="ad-form__input visually-hidden"
+                  accept="image/png, image/jpeg"
                 />
                 <label for="images" class="ad-form__drop-zone"
                   >Загрузить<br />фото...</label

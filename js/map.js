@@ -56,8 +56,8 @@ map.on('move', function () {
 
 mainMarker.on('move', function (e) {
   const position = mainMarker.getLatLng(e);
-  let lat = Number(position['lat']).toFixed(5);
-  let lng = Number(position['lng']).toFixed(5);
+  const lat = Number(position['lat']).toFixed(5);
+  const lng = Number(position['lng']).toFixed(5);
   address.value = lat + ', ' + lng;
   address.setAttribute('readonly', 'true');
 });
@@ -81,7 +81,11 @@ const setOffers = () => {
       {
         icon: pinIcon,
       },
-    ).bindPopup(mapCanvas.appendChild(similarListFragment));
+    ).bindPopup(mapCanvas.appendChild(similarListFragment),
+      {
+        keepInView: true,
+      },
+    );
     marker.addTo(map);
     marker.on('click', function () {
       generateOffer(i);

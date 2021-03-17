@@ -1,5 +1,3 @@
-import { QUANTITY, offersList } from './const.js';
-import { getOfferInitialData } from './data.js';
 const getRandomArrayItem = function (arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 };
@@ -9,18 +7,8 @@ const getRandomNumber = function (min, max, decimalPoints) {
   return +findRandom.toFixed(decimalPoints);
 };
 
-const generatePropertiesData = function () {
-  for (let i = 0; i < QUANTITY; i++) {
-    offersList.push(getOfferInitialData(i));
-  }
-};
-
-generatePropertiesData();
-
 //prettier-ignore
 export {
-  generatePropertiesData,
   getRandomArrayItem,
-  getRandomNumber,
-  offersList
+  getRandomNumber
 };

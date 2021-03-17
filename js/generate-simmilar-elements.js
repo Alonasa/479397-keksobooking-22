@@ -1,4 +1,3 @@
-import { offersList } from './utils.js';
 import { PROPERTY_TYPES } from './const.js';
 
 const similarCardTemplate = document
@@ -36,7 +35,7 @@ const oldElementRemove = function (parent) {
 };
 
 //prettier-ignore
-const generateOffer = function (i) {
+const generateOffer = function (i, offersList) {
   const offerElement = similarCardTemplate.cloneNode(true);
   offerElement.classList.add('map__card');
   offerElement.querySelector('.popup__title')

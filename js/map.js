@@ -1,21 +1,29 @@
 import { formActivation } from './user-form.js';
-const L = window.L;
+import { getMapData } from './api.js';
+import { QUANTITY } from './const.js';
+
 //prettier-ignore
 import {
   similarListFragment,
   mapCanvas,
   generateOffer
 } from './generate-simmilar-elements.js';
+import { showAlert } from './utils.js';
 
+const L = window.L;
 const CENTER_LAT = 35.68251;
 const CENTER_LNG = 139.75121;
 const address = document.querySelector('#address');
+
+const setDefaultAddress = () => {
+  return (address.value = CENTER_LAT.toFixed(5) + ', ' + CENTER_LNG.toFixed(5));
+};
 
 //prettier-ignore
 const map = L.map('map-canvas')
   .on('load', () => {
     formActivation();
-    address.value = CENTER_LAT.toFixed(5) + ', ' + CENTER_LNG.toFixed(5);
+    setDefaultAddress();
   })
   .setView(
     {
@@ -90,4 +98,9 @@ const setOffers = (offersList) => {
     });
   }
 };
-export { setOffers };
+
+getMapData((adds) => {
+  setOffers(adds.slice(0, QUANTITY));
+}, showAlert('Не удалось получить информацию об обьявлениях с сервера. Попробуйте позже'));
+
+export { setOffers, setDefaultAddress };

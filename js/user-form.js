@@ -1,4 +1,8 @@
 import { PROPERTY_TYPES_MIN_PRICES, MAX_PRICE } from './const.js';
+import { isEscEvt } from './utils.js';
+import { sendFormData } from './api.js';
+import { setDefaultAddress } from './map.js';
+
 const getAdvertiseForm = document.querySelector('.ad-form');
 const getFiltersForm = document.querySelectorAll('.map__filter');
 const getFeatures = document.querySelector('.map__features');
@@ -10,6 +14,8 @@ const getTimeIn = getTime.querySelector('#timein');
 const getTimeOut = getTime.querySelector('#timeout');
 const roomsQuantity = document.querySelector('#room_number');
 const guestsQuantity = document.querySelector('#capacity');
+const resetButton = document.querySelector('.ad-form__reset');
+
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 
@@ -98,5 +104,61 @@ const roomCapacity = () => {
 roomsQuantity.addEventListener('change', roomCapacity);
 guestsQuantity.addEventListener('change', roomCapacity);
 roomCapacity();
+
+const onMessageEscKeydown = (evt) => {
+  if (isEscEvt) {
+    evt.preventDefault();
+    document.querySelector('main').lastChild.remove();
+    document.removeEventListener('click', onMessageClick, { once: true });
+  }
+};
+
+const onMessageClick = () => {
+  document.querySelector('main').lastChild.remove();
+  document.removeEventListener('keydown', onMessageEscKeydown, { once: true });
+};
+
+const showSuccessMessage = () => {
+  const successTemplate = document.querySelector('#success').content;
+  const successMessage = successTemplate
+    .querySelector('.success')
+    .cloneNode(true);
+  document.querySelector('main').appendChild(successMessage);
+  document.addEventListener('keydown', onMessageEscKeydown, { once: true });
+  document.addEventListener('click', onMessageClick, { once: true });
+};
+
+const showErrorMessage = () => {
+  const errorTemplate = document.querySelector('#error').content;
+  const errorMessage = errorTemplate.querySelector('.error').cloneNode(true);
+  document.querySelector('main').appendChild(errorMessage);
+  document.addEventListener('keydown', onMessageEscKeydown, { once: true });
+  document.addEventListener('click', onMessageClick, { once: true });
+};
+
+const resetFormData = () => {
+  getAdvertiseForm.reset();
+  typeRentValue();
+  setDefaultAddress();
+};
+
+resetButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  resetFormData();
+});
+
+getAdvertiseForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  //prettier-ignore
+  sendFormData(
+    () => {
+      showSuccessMessage();
+      resetFormData();
+    },
+    () => showErrorMessage(),
+    new FormData(evt.target),
+  );
+});
 
 export { formActivation };

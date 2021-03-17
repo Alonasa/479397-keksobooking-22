@@ -7,8 +7,8 @@ import {
   generateOffer
 } from './generate-simmilar-elements.js';
 
-const CENTER_LAT = 35.4137;
-const CENTER_LNG = 139.41502;
+const CENTER_LAT = 35.68251;
+const CENTER_LNG = 139.75121;
 const address = document.querySelector('#address');
 
 //prettier-ignore

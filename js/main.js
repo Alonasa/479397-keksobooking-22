@@ -1,6 +1,7 @@
-import './const.js';
 import './utils.js';
+import './const.js';
 import './data.js';
 import './generate-simmilar-elements.js';
-import './user-form.js';
 import './map.js';
+import './user-form.js';
+import './api.js';

@@ -1,22 +1,29 @@
 import { formActivation } from './user-form.js';
-import { offersList } from './utils.js';
-const L = window.L;
+import { getMapData } from './api.js';
+import { QUANTITY } from './const.js';
+
 //prettier-ignore
 import {
   similarListFragment,
   mapCanvas,
   generateOffer
 } from './generate-simmilar-elements.js';
+import { showAlert } from './utils.js';
 
-const CENTER_LAT = 35.4137;
-const CENTER_LNG = 139.41502;
+const L = window.L;
+const CENTER_LAT = 35.68251;
+const CENTER_LNG = 139.75121;
 const address = document.querySelector('#address');
+
+const setDefaultAddress = () => {
+  return (address.value = CENTER_LAT.toFixed(5) + ', ' + CENTER_LNG.toFixed(5));
+};
 
 //prettier-ignore
 const map = L.map('map-canvas')
   .on('load', () => {
     formActivation();
-    address.value = CENTER_LAT.toFixed(5) + ', ' + CENTER_LNG.toFixed(5);
+    setDefaultAddress();
   })
   .setView(
     {
@@ -70,27 +77,30 @@ const pinIcon = L.icon({
   iconAnchor: [18, 36],
 });
 //prettier-ignore
-const setOffers = () => {
+
+const setOffers = (offersList) => {
   for (let i = 0; i < offersList.length; i++) {
-    const { x = marker.lat, y = marker.lng } = offersList[i].location;
+    const { lat, lng } = offersList[i].location;
     const marker = L.marker(
       {
-        lat: x.toFixed(5),
-        lng: y.toFixed(5),
+        lat: lat.toFixed(5),
+        lng: lng.toFixed(5),
       },
       {
         icon: pinIcon,
       },
-    ).bindPopup(mapCanvas.appendChild(similarListFragment),
-      {
-        keepInView: true,
-      },
-    );
+    ).bindPopup(mapCanvas.appendChild(similarListFragment), {
+      keepInView: true,
+    });
     marker.addTo(map);
     marker.on('click', function () {
-      generateOffer(i);
-    })
+      generateOffer(i, offersList);
+    });
   }
 };
 
-setOffers();
+getMapData((adds) => {
+  setOffers(adds.slice(0, QUANTITY));
+}, showAlert('Не удалось получить информацию об обьявлениях с сервера. Попробуйте позже'));
+
+export { setOffers, setDefaultAddress };

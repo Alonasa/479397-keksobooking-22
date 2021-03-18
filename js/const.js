@@ -34,8 +34,6 @@ const PROPERTY_TYPES = {
   bungalow: 'Бунгало',
 };
 
-const offersList = [];
-
 const PROPERTY_TYPES_MIN_PRICES = {
   palace: 10000,
   flat: 1000,
@@ -61,6 +59,5 @@ export {
   FEATURES_LIST,
   PHOTOS_LIST,
   PROPERTY_TYPES,
-  offersList,
   PROPERTY_TYPES_MIN_PRICES
 };

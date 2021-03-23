@@ -1,4 +1,4 @@
-import { formActivation } from './user-form.js';
+import { formActivation, filterActivation } from './user-form.js';
 import { getMapData } from './api.js';
 import { QUANTITY } from './const.js';
 import { propertyTypeFilter, propertyType } from './filters.js';
@@ -113,7 +113,8 @@ const removeAddsMarkers = () => {
 
 //prettier-ignore
 getMapData((adds) => {
-  setOffers(adds);
+  setOffers(adds.slice(0, QUANTITY));
+  filterActivation()
   propertyType.addEventListener('change', function () {
     removeAddsMarkers();
     const filter = propertyTypeFilter(adds);

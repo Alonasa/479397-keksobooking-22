@@ -1,6 +1,7 @@
 import { formActivation } from './user-form.js';
 import { getMapData } from './api.js';
 import { QUANTITY } from './const.js';
+import { propertyTypeFilter, propertyType } from './filters.js';
 
 //prettier-ignore
 import {
@@ -76,6 +77,9 @@ const pinIcon = L.icon({
   iconSize: [36, 36],
   iconAnchor: [18, 36],
 });
+
+const markers = [];
+
 //prettier-ignore
 
 const setOffers = (offersList) => {
@@ -96,11 +100,27 @@ const setOffers = (offersList) => {
     marker.on('click', function () {
       generateOffer(i, offersList);
     });
+    markers.push(marker);
   }
 };
 
+const removeAddsMarkers = () => {
+  markers.forEach((marker) => {
+    marker.remove();
+  });
+  markers.length = 0;
+};
+
+//prettier-ignore
 getMapData((adds) => {
-  setOffers(adds.slice(0, QUANTITY));
-}, showAlert('Не удалось получить информацию об обьявлениях с сервера. Попробуйте позже'));
+  setOffers(adds);
+  propertyType.addEventListener('change', function () {
+    removeAddsMarkers();
+    const filter = propertyTypeFilter(adds);
+    setOffers(filter.slice(0, QUANTITY));
+  });
+}, showAlert(
+  'Не удалось получить информацию об обьявлениях с сервера. Попробуйте позже',
+));
 
 export { setOffers, setDefaultAddress };

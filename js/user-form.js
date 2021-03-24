@@ -28,6 +28,9 @@ formDeactivation();
 
 const formActivation = () => {
   getAdvertiseForm.classList.remove('ad-form--disabled');
+};
+
+const filterActivation = () => {
   getFiltersForm.forEach((element) => (element.disabled = false));
   getFeatures.disabled = false;
 };
@@ -161,4 +164,4 @@ getAdvertiseForm.addEventListener('submit', (evt) => {
   );
 });
 
-export { formActivation };
+export { formActivation, filterActivation };

@@ -40,7 +40,7 @@ const typeRentValue = () => {
   priceRent.type = 'number';
   priceRent.min = minPriceValue;
   priceRent.max = MAX_PRICE;
-  priceRent.value = minPriceValue;
+  priceRent.placeholder = minPriceValue;
 };
 
 typeRentValue();

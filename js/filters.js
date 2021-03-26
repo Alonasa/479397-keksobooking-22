@@ -2,16 +2,16 @@ import { QUANTITY } from './const.js';
 import { removeAddsMarkers, setOffers } from './map.js';
 import { debounce } from './utils.js';
 
+const HIGH_PRICE_VALUE = 50000;
+const MIDDLE_PRICE_VALUE = 10000;
+const DEFAULT_ANY_VALUE = 'any';
+const RENDER_DELAY = 500;
+
 const propertyType = document.querySelector('#housing-type');
 const propertyPrice = document.querySelector('#housing-price');
 const propertyRooms = document.querySelector('#housing-rooms');
 const propertyCapacity = document.querySelector('#housing-guests');
 const formFilters = document.querySelector('.map__filters');
-
-const HIGH_PRICE_VALUE = 50000;
-const MIDDLE_PRICE_VALUE = 10000;
-const DEFAULT_ANY_VALUE = 'any';
-const RENDER_DELAY = 500;
 
 const propertyTypeFilter = (offer) => {
   return (

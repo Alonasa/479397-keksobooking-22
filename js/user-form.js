@@ -3,6 +3,9 @@ import { isEscEvt } from './utils.js';
 import { sendFormData } from './api.js';
 import { setDefaultAddress } from './map.js';
 
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
+
 const getAdvertiseForm = document.querySelector('.ad-form');
 const getFiltersForm = document.querySelectorAll('.map__filter');
 const getFeatures = document.querySelector('.map__features');
@@ -15,9 +18,6 @@ const getTimeOut = getTime.querySelector('#timeout');
 const roomsQuantity = document.querySelector('#room_number');
 const guestsQuantity = document.querySelector('#capacity');
 const resetButton = document.querySelector('.ad-form__reset');
-
-const MIN_TITLE_LENGTH = 30;
-const MAX_TITLE_LENGTH = 100;
 
 const formDeactivation = () => {
   getAdvertiseForm.classList.add('ad-form--disabled');

@@ -35,39 +35,39 @@ const oldElementRemove = function (parent) {
 };
 
 //prettier-ignore
-const generateOffer = function (i, offersList) {
+const generateOffer = function (offersList) {
   const offerElement = similarCardTemplate.cloneNode(true);
   offerElement.classList.add('map__card');
   offerElement.querySelector('.popup__title')
-    .textContent = offersList[i].offer.title;
+    .textContent = offersList.offer.title;
   offerElement.querySelector('.popup__text--address')
-    .textContent = offersList[i].offer.address;
+    .textContent = offersList.offer.address;
   offerElement.querySelector('.popup__text--price')
-    .textContent = `${offersList[i].offer.price} ₽/ночь`;
+    .textContent = `${offersList.offer.price} ₽/ночь`;
   offerElement.querySelector('.popup__type')
-    .textContent = PROPERTY_TYPES[offersList[i].offer.type];
+    .textContent = PROPERTY_TYPES[offersList.offer.type];
   offerElement.querySelector('.popup__text--capacity')
-    .textContent = `${offersList[i].offer.rooms} комнаты для
-    ${offersList[i].offer.guests} гостей`;
+    .textContent = `${offersList.offer.rooms} комнаты для
+    ${offersList.offer.guests} гостей`;
   offerElement.querySelector('.popup__text--time')
-    .textContent = `Заезд после ${offersList[i].offer.checkin},
-    выезд до ${offersList[i].offer.checkout}`;
+    .textContent = `Заезд после ${offersList.offer.checkin},
+    выезд до ${offersList.offer.checkout}`;
   const features = offerElement.querySelector('.popup__features');
   oldElementRemove(features);
-  offersList[i].offer.features.forEach((feature) => {
+  offersList.offer.features.forEach((feature) => {
     const currentFeature = createFeature(feature);
     features.appendChild(currentFeature);
   });
   offerElement.querySelector('.popup__description')
-    .textContent = offersList[i].offer.description;
+    .textContent = offersList.offer.description;
   const photos = offerElement.querySelector('.popup__photos')
   oldElementRemove(photos);
-  offersList[i].offer.photos.forEach((photo) => {
+  offersList.offer.photos.forEach((photo) => {
     const currentPhoto = createPhoto(photo);
     photos.appendChild(currentPhoto);
   });
   offerElement.querySelector('.popup__avatar')
-    .src = offersList[i].author.avatar;
+    .src = offersList.author.avatar;
   similarListFragment.appendChild(offerElement);
   return offerElement;
 };

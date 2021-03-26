@@ -1,19 +1,14 @@
+/* global L:readonly */
 import { formActivation, filterActivation } from './user-form.js';
 import { getMapData } from './api.js';
 import { QUANTITY } from './const.js';
-import { propertyTypeFilter, propertyType } from './filters.js';
+import { onFiltersChange } from './filters.js';
 
-//prettier-ignore
-import {
-  similarListFragment,
-  mapCanvas,
-  generateOffer
-} from './generate-simmilar-elements.js';
-import { showAlert } from './utils.js';
+import { generateOffer } from './generate-simmilar-elements.js';
 
-const L = window.L;
 const CENTER_LAT = 35.68251;
 const CENTER_LNG = 139.75121;
+
 const address = document.querySelector('#address');
 
 const setDefaultAddress = () => {
@@ -80,11 +75,15 @@ const pinIcon = L.icon({
 
 const markers = [];
 
+const createPopup = (offer) => {
+  const popupItem = generateOffer(offer);
+  return popupItem;
+};
 //prettier-ignore
 
 const setOffers = (offersList) => {
-  for (let i = 0; i < offersList.length; i++) {
-    const { lat, lng } = offersList[i].location;
+  offersList.slice(0, QUANTITY).forEach((offer) => {
+    const { lat, lng } = offer.location;
     const marker = L.marker(
       {
         lat: lat.toFixed(5),
@@ -93,15 +92,14 @@ const setOffers = (offersList) => {
       {
         icon: pinIcon,
       },
-    ).bindPopup(mapCanvas.appendChild(similarListFragment), {
-      keepInView: true,
-    });
-    marker.addTo(map);
-    marker.on('click', function () {
-      generateOffer(i, offersList);
-    });
+    )
+    marker
+      .addTo(map)
+      .bindPopup(() => createPopup(offer), {
+        keepInView: true,
+      });
     markers.push(marker);
-  }
+  });
 };
 
 const removeAddsMarkers = () => {
@@ -113,15 +111,9 @@ const removeAddsMarkers = () => {
 
 //prettier-ignore
 getMapData((adds) => {
-  setOffers(adds.slice(0, QUANTITY));
-  filterActivation()
-  propertyType.addEventListener('change', function () {
-    removeAddsMarkers();
-    const filter = propertyTypeFilter(adds);
-    setOffers(filter.slice(0, QUANTITY));
-  });
-}, showAlert(
-  'Не удалось получить информацию об обьявлениях с сервера. Попробуйте позже',
-));
+  setOffers(adds);
+  filterActivation();
+  onFiltersChange(adds);
+});
 
-export { setOffers, setDefaultAddress };
+export { setOffers, setDefaultAddress, removeAddsMarkers };

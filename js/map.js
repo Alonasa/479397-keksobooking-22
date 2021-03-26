@@ -3,11 +3,13 @@ import { formActivation, filterActivation } from './user-form.js';
 import { getMapData } from './api.js';
 import { QUANTITY } from './const.js';
 import { onFiltersChange } from './filters.js';
-
 import { generateOffer } from './generate-simmilar-elements.js';
 
 const CENTER_LAT = 35.68251;
 const CENTER_LNG = 139.75121;
+const MAIN_PIN_ICON_LOCATION = './img/main-pin.svg';
+const MAIN_PIN_ICON_SIZES = [36, 36];
+const MAIN_PIN_ICON_ANCHOR = [18, 36];
 
 const address = document.querySelector('#address');
 
@@ -35,9 +37,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 const mainPinIcon = L.icon({
-  iconUrl: './img/main-pin.svg',
-  iconSize: [36, 36],
-  iconAnchor: [18, 36],
+  iconUrl: MAIN_PIN_ICON_LOCATION,
+  iconSize: MAIN_PIN_ICON_SIZES,
+  iconAnchor: MAIN_PIN_ICON_ANCHOR,
 });
 
 //prettier-ignore

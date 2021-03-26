@@ -6,46 +6,46 @@ import { setDefaultAddress } from './map.js';
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 
-const getAdvertiseForm = document.querySelector('.ad-form');
-const getFiltersForm = document.querySelectorAll('.map__filter');
-const getFeatures = document.querySelector('.map__features');
-const adTitle = getAdvertiseForm.querySelector('#title');
-const getTypeRent = getAdvertiseForm.querySelector('#type');
-const getPriceRent = getAdvertiseForm.querySelector('#price');
-const getTime = getAdvertiseForm.querySelector('.ad-form__element--time');
-const getTimeIn = getTime.querySelector('#timein');
-const getTimeOut = getTime.querySelector('#timeout');
+const advertiseForm = document.querySelector('.ad-form');
+const filtersForm = document.querySelectorAll('.map__filter');
+const advertiseFeatures = document.querySelector('.map__features');
+const adTitle = advertiseForm.querySelector('#title');
+const typeRent = advertiseForm.querySelector('#type');
+const priceRent = advertiseForm.querySelector('#price');
+const time = advertiseForm.querySelector('.ad-form__element--time');
+const timeIn = time.querySelector('#timein');
+const timeOut = time.querySelector('#timeout');
 const roomsQuantity = document.querySelector('#room_number');
 const guestsQuantity = document.querySelector('#capacity');
 const resetButton = document.querySelector('.ad-form__reset');
 
 const formDeactivation = () => {
-  getAdvertiseForm.classList.add('ad-form--disabled');
-  getFiltersForm.forEach((element) => element.setAttribute('disabled', ''));
-  getFeatures.setAttribute('disabled', '');
+  advertiseForm.classList.add('ad-form--disabled');
+  filtersForm.forEach((element) => element.setAttribute('disabled', ''));
+  advertiseFeatures.setAttribute('disabled', '');
 };
 formDeactivation();
 
 const formActivation = () => {
-  getAdvertiseForm.classList.remove('ad-form--disabled');
+  advertiseForm.classList.remove('ad-form--disabled');
 };
 
 const filterActivation = () => {
-  getFiltersForm.forEach((element) => (element.disabled = false));
-  getFeatures.disabled = false;
+  filtersForm.forEach((element) => (element.disabled = false));
+  advertiseFeatures.disabled = false;
 };
 
 const typeRentValue = () => {
-  const getMinPrice = PROPERTY_TYPES_MIN_PRICES[getTypeRent.value];
-  getPriceRent.type = 'number';
-  getPriceRent.min = getMinPrice;
-  getPriceRent.max = MAX_PRICE;
-  getPriceRent.value = getMinPrice;
+  const minPriceValue = PROPERTY_TYPES_MIN_PRICES[typeRent.value];
+  priceRent.type = 'number';
+  priceRent.min = minPriceValue;
+  priceRent.max = MAX_PRICE;
+  priceRent.value = minPriceValue;
 };
 
 typeRentValue();
 
-getTypeRent.addEventListener('change', typeRentValue);
+typeRent.addEventListener('change', typeRentValue);
 
 const timeSync = (time1, time2) => {
   time1.addEventListener('change', function () {
@@ -53,8 +53,8 @@ const timeSync = (time1, time2) => {
   });
 };
 
-timeSync(getTimeIn, getTimeOut);
-timeSync(getTimeOut, getTimeIn);
+timeSync(timeIn, timeOut);
+timeSync(timeOut, timeIn);
 
 adTitle.addEventListener('input', () => {
   const valueLength = adTitle.value.length;
@@ -140,7 +140,7 @@ const showErrorMessage = () => {
 };
 
 const resetFormData = () => {
-  getAdvertiseForm.reset();
+  advertiseForm.reset();
   typeRentValue();
   setDefaultAddress();
 };
@@ -150,7 +150,7 @@ resetButton.addEventListener('click', (evt) => {
   resetFormData();
 });
 
-getAdvertiseForm.addEventListener('submit', (evt) => {
+advertiseForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   //prettier-ignore

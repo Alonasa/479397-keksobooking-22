@@ -31,7 +31,7 @@ const formActivation = () => {
 };
 
 const filterActivation = () => {
-  filtersForm.forEach((element) => (element.disabled = false));
+  filtersForm.forEach((element) => element.removeAttribute('disabled'));
   advertiseFeatures.disabled = false;
 };
 

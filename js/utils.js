@@ -34,10 +34,22 @@ const isEscEvt = (evt) => {
   return evt.key === ('Escape' || 'Esc');
 };
 
+const debounce = (callback, time) => {
+  let interval;
+  return (...args) => {
+    clearTimeout(interval);
+    interval = setTimeout(() => {
+      interval = null;
+      callback(...args);
+    }, time);
+  };
+};
+
 //prettier-ignore
 export {
   getRandomArrayItem,
   getRandomNumber,
   showAlert,
-  isEscEvt
+  isEscEvt,
+  debounce
 };

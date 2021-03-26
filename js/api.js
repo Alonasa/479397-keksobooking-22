@@ -1,12 +1,12 @@
+import { showAlert } from './utils.js';
+
 //prettier-ignore
-const getMapData = (onSuccess, onFail) => {
+const getMapData = (onSuccess) => {
   fetch('https://22.javascript.pages.academy/keksobooking/data/')
     .then((response) => response.json())
-    .then((adds) => {
-      onSuccess(adds);
-    })
+    .then(onSuccess)
     .catch(() =>
-      onFail(),
+      showAlert('Не удалось получить информацию об обьявлениях с сервера. Попробуйте позже'),
     );
 };
 
